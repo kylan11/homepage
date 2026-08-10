@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Francesco Lauritano — Cloud & Platform Engineering</title>
+  <title>Francesco Lauritano — Cloud &amp; Platform Engineering</title>
   <meta name="description" content="Francesco Lauritano — Platform Engineer and Cloud consultant specializing in Cloud Infrastructure, DevOps, and custom backend solutions.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,16 +13,16 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #0b0b0d;
+      --bg: #0a0a0b;
       --bg-raised: #121215;
       --bg-subtle: #18181c;
-      --border: #232328;
-      --text: #e6e1d8;
-      --text-secondary: #908b82;
-      --text-muted: #5c584f;
-      --accent: #c17a3a;
+      --border: #1e1e22;
+      --text: #e8e4dc;
+      --text-secondary: #8a857d;
+      --text-muted: #4a4740;
+      --accent: #c47d3a;
       --accent-light: #d4915a;
-      --accent-glow: rgba(193, 122, 58, 0.12);
+      --accent-glow: rgba(196, 125, 58, 0.12);
       --mono: 'JetBrains Mono', monospace;
       --serif: 'Instrument Serif', Georgia, serif;
       --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -40,6 +40,15 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse 60% 50% at 70% 20%, rgba(196, 125, 58, 0.035), transparent);
+    }
+
     ::selection {
       background: var(--accent);
       color: var(--bg);
@@ -54,10 +63,10 @@
       background-image:
         linear-gradient(var(--border) 1px, transparent 1px),
         linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 80px 80px;
-      opacity: 0.18;
-      mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 20%, transparent 70%);
-      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 20%, transparent 70%);
+      background-size: 100px 100px;
+      opacity: 0.1;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 30%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 30%, transparent 70%);
     }
 
     /* ─── Navigation ─── */
@@ -67,18 +76,19 @@
       left: 0;
       right: 0;
       z-index: 100;
-      padding: 1.25rem 2.5rem;
+      padding: 1.5rem 2.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: background 0.4s, backdrop-filter 0.4s;
+      transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
     }
 
     nav.scrolled {
-      background: rgba(11, 11, 13, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(10, 10, 11, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom-color: var(--border);
     }
 
     .nav-logo {
@@ -94,21 +104,41 @@
 
     .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 2rem;
       list-style: none;
     }
 
     .nav-links a {
       font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--text-muted);
       text-decoration: none;
       transition: color 0.3s;
+      position: relative;
     }
 
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
 
     .nav-toggle {
       display: none;
@@ -145,45 +175,40 @@
       display: flex;
       align-items: center;
       padding: 8rem 0 6rem;
+      position: relative;
     }
 
     .hero-inner {
       width: 100%;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
       align-items: center;
-    }
-
-    .hero-content {}
-
-    .hero-top {
-      display: block;
     }
 
     .hero-label {
       font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
       opacity: 0;
       transform: translateY(12px);
-      animation: fadeUp 0.7s 0.3s forwards;
+      animation: fadeUp 0.8s 0.2s forwards;
     }
 
     .hero-name {
       font-family: var(--serif);
-      font-size: clamp(3.2rem, 7vw, 6rem);
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
       font-weight: 400;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
       color: var(--text);
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       opacity: 0;
       transform: translateY(20px);
-      animation: fadeUp 0.8s 0.45s forwards;
+      animation: fadeUp 0.9s 0.35s forwards;
     }
 
     .hero-name em {
@@ -192,23 +217,23 @@
     }
 
     .hero-description {
-      max-width: 540px;
+      max-width: 480px;
       font-size: 1.05rem;
       color: var(--text-secondary);
-      line-height: 1.75;
+      line-height: 1.7;
       margin-bottom: 3rem;
       opacity: 0;
       transform: translateY(16px);
-      animation: fadeUp 0.8s 0.6s forwards;
+      animation: fadeUp 0.8s 0.5s forwards;
     }
 
     .hero-cta {
       display: flex;
-      gap: 1.25rem;
+      gap: 1.5rem;
       align-items: center;
       opacity: 0;
       transform: translateY(14px);
-      animation: fadeUp 0.7s 0.75s forwards;
+      animation: fadeUp 0.7s 0.65s forwards;
     }
 
     .btn-primary {
@@ -229,7 +254,7 @@
 
     .btn-primary:hover {
       background: var(--accent-light);
-      box-shadow: 0 0 30px var(--accent-glow);
+      box-shadow: 0 0 40px var(--accent-glow);
     }
 
     .btn-secondary {
@@ -281,29 +306,56 @@
       justify-content: center;
       align-items: flex-end;
       opacity: 0;
-      animation: fadeUp 1s 0.6s forwards;
+      animation: fadeUp 1s 0.5s forwards;
+    }
+
+    .hero-portrait::before {
+      content: '';
+      position: absolute;
+      top: 10%;
+      right: 0;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(196, 125, 58, 0.08), transparent 70%);
+      pointer-events: none;
+      z-index: -1;
     }
 
     .hero-portrait-frame {
       position: relative;
       width: 100%;
-      max-width: 380px;
+      max-width: 340px;
       aspect-ratio: 3 / 4;
       overflow: hidden;
       border: 1px solid var(--border);
+      transition: border-color 0.4s;
     }
 
     .hero-portrait-frame::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        180deg,
-        transparent 55%,
-        var(--bg) 100%
-      );
+      background: linear-gradient(180deg, transparent 50%, var(--bg) 100%);
       pointer-events: none;
       z-index: 2;
+    }
+
+    .hero-portrait-frame::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, rgba(196, 125, 58, 0.3), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.6s;
+      z-index: -1;
+    }
+
+    .hero-portrait:hover .hero-portrait-frame::before {
+      opacity: 1;
+    }
+
+    .hero-portrait:hover .hero-portrait-frame {
+      border-color: var(--accent);
     }
 
     .hero-portrait img {
@@ -313,6 +365,12 @@
       object-position: top center;
       filter: grayscale(0.3) contrast(1.05) brightness(0.9);
       display: block;
+      transition: transform 0.6s, filter 0.6s;
+    }
+
+    .hero-portrait:hover img {
+      transform: scale(1.03);
+      filter: grayscale(0.1) contrast(1.08) brightness(0.95);
     }
 
     .hero-portrait-accent {
@@ -334,9 +392,25 @@
       display: flex;
       align-items: baseline;
       gap: 1.5rem;
-      margin-bottom: 4rem;
+      margin-bottom: 5rem;
       padding-bottom: 1.5rem;
       border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .section-header::before {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .section-header.reveal.visible::before {
+      width: 120px;
     }
 
     .section-number {
@@ -348,14 +422,15 @@
 
     .section-title {
       font-family: var(--serif);
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
       font-weight: 400;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
     }
 
     /* ─── Services ─── */
     .services {
-      padding: 8rem 0;
+      padding: 10rem 0;
     }
 
     .services-grid {
@@ -368,9 +443,10 @@
 
     .service-card {
       background: var(--bg);
-      padding: 2.5rem;
-      transition: background 0.4s;
+      padding: 3rem;
+      transition: background 0.5s;
       position: relative;
+      overflow: hidden;
     }
 
     .service-card:hover {
@@ -385,11 +461,27 @@
       width: 0;
       height: 2px;
       background: var(--accent);
-      transition: width 0.5s;
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .service-card:hover::before {
       width: 100%;
+    }
+
+    .service-card::after {
+      content: attr(data-num);
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      transition: color 0.3s;
+    }
+
+    .service-card:hover::after {
+      color: var(--accent);
     }
 
     .service-icon {
@@ -399,47 +491,87 @@
       letter-spacing: 0.1em;
       margin-bottom: 1.5rem;
       display: block;
+      transition: transform 0.3s;
+    }
+
+    .service-card:hover .service-icon {
+      transform: translateX(4px);
     }
 
     .service-card h3 {
       font-family: var(--serif);
-      font-size: 1.35rem;
+      font-size: 1.5rem;
       font-weight: 400;
       margin-bottom: 0.75rem;
     }
 
     .service-card p {
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       color: var(--text-secondary);
       line-height: 1.7;
+      max-width: 400px;
     }
 
     /* ─── Projects ─── */
     .projects {
-      padding: 8rem 0;
+      padding: 10rem 0;
     }
 
     .project {
       display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 3rem;
-      padding: 3rem 0;
-      border-bottom: 1px solid var(--border);
-      transition: all 0.3s;
+      grid-template-columns: 80px 140px 1fr;
+      gap: 2rem;
+      padding: 3.5rem 2rem;
+      margin: 0 -2rem;
+      border-top: 1px solid var(--border);
+      align-items: start;
+      position: relative;
+      transition: background 0.4s, padding-left 0.4s;
     }
 
-    .project:first-of-type {
-      border-top: 1px solid var(--border);
+    .project:last-of-type {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .project:hover {
-      padding-left: 1rem;
+      background: var(--bg-raised);
+      padding-left: 2.5rem;
+    }
+
+    .project:hover::before {
+      transform: scaleY(1);
+    }
+
+    .project-index {
+      font-family: var(--mono);
+      font-size: 1.8rem;
+      color: var(--text-muted);
+      line-height: 1;
+      opacity: 0.25;
+      transition: opacity 0.3s;
+    }
+
+    .project:hover .project-index {
+      opacity: 0.5;
     }
 
     .project-meta {
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
+      padding-top: 0.4rem;
     }
 
     .project-client {
@@ -458,17 +590,22 @@
 
     .project-content h3 {
       font-family: var(--serif);
-      font-size: 1.5rem;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
       font-weight: 400;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.75rem;
+      transition: color 0.3s;
+    }
+
+    .project:hover .project-content h3 {
+      color: var(--accent-light);
     }
 
     .project-content p {
       font-size: 0.9rem;
       color: var(--text-secondary);
       line-height: 1.75;
-      max-width: 580px;
-      margin-bottom: 1rem;
+      max-width: 520px;
+      margin-bottom: 1.25rem;
     }
 
     .project-tags {
@@ -482,23 +619,193 @@
       font-size: 0.65rem;
       letter-spacing: 0.06em;
       color: var(--text-muted);
-      padding: 0.3rem 0.7rem;
+      padding: 0.35rem 0.8rem;
       border: 1px solid var(--border);
       transition: all 0.3s;
+      cursor: default;
     }
 
     .project:hover .project-tags span {
       border-color: var(--text-muted);
+      color: var(--text-secondary);
+    }
+
+    .project-tags span:hover {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    /* ─── Open Source ─── */
+    .opensource {
+      padding: 10rem 0;
+    }
+
+    .opensource-feature {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 3.5rem;
+      padding: 4rem;
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.4s;
+    }
+
+    .opensource-feature::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), transparent 70%);
+      opacity: 0.6;
+    }
+
+    .opensource-feature::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(196, 125, 58, 0.05), transparent 70%);
+      pointer-events: none;
+    }
+
+    .opensource-feature:hover {
+      border-color: var(--text-muted);
+    }
+
+    .opensource-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .badge-backdrop {
+      position: relative;
+      width: 100%;
+      max-width: 240px;
+    }
+
+    .badge-backdrop::before {
+      content: '';
+      position: absolute;
+      inset: -25%;
+      background: radial-gradient(ellipse 65% 55% at 50% 55%, rgba(196, 125, 58, 0.10), transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .badge-backdrop::after {
+      content: '';
+      position: absolute;
+      inset: -15%;
+      background: radial-gradient(ellipse 55% 45% at 50% 60%, rgba(180, 165, 130, 0.06), transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .badge-backdrop img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.5));
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .opensource-feature:hover .badge-backdrop img {
+      transform: scale(1.04) translateY(-4px);
+    }
+
+    .opensource-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .opensource-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .opensource-meta .label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .opensource-meta .sub {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .opensource-content h3 {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .opensource-content p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 600px;
+      margin-bottom: 1rem;
+    }
+
+    .opensource-traction {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 1.5rem 0;
+      padding: 1.25rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .opensource-traction span {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .opensource-traction a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    .opensource-traction a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .opensource-cta {
+      margin-top: 1.5rem;
     }
 
     /* ─── Credentials ─── */
     .credentials {
-      padding: 4rem 0 8rem;
+      padding: 6rem 0 10rem;
     }
 
     .creds-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
@@ -506,7 +813,12 @@
 
     .cred-item {
       background: var(--bg);
-      padding: 2rem 2.5rem;
+      padding: 2.5rem;
+      transition: background 0.4s;
+    }
+
+    .cred-item:hover {
+      background: var(--bg-raised);
     }
 
     .cred-item .label {
@@ -515,38 +827,40 @@
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
 
     .cred-item .value {
       font-family: var(--serif);
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: var(--text);
+      line-height: 1.3;
     }
 
     .cred-item .sub {
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       color: var(--text-secondary);
-      margin-top: 0.2rem;
+      margin-top: 0.4rem;
+      line-height: 1.5;
     }
 
     /* ─── Contact ─── */
     .contact {
-      padding: 8rem 0;
+      padding: 10rem 0;
       border-top: 1px solid var(--border);
     }
 
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 5rem;
+      gap: 6rem;
     }
 
     .contact-text h2 {
       font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
       font-weight: 400;
-      line-height: 1.15;
+      line-height: 1.1;
       margin-bottom: 1.5rem;
     }
 
@@ -556,11 +870,11 @@
     }
 
     .contact-text p {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--text-secondary);
       line-height: 1.75;
       max-width: 400px;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
     .contact-detail {
@@ -568,7 +882,7 @@
       font-size: 0.72rem;
       color: var(--text-muted);
       letter-spacing: 0.06em;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
 
     .contact-detail a {
@@ -582,7 +896,7 @@
     .contact-form {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 2rem;
     }
 
     .form-group {
@@ -596,28 +910,30 @@
       text-transform: uppercase;
       color: var(--text-muted);
       display: block;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.75rem;
     }
 
     .form-group input,
     .form-group textarea {
       width: 100%;
       font-family: var(--sans);
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 300;
       color: var(--text);
-      background: var(--bg-raised);
-      border: 1px solid var(--border);
-      padding: 0.9rem 1.1rem;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 0;
       outline: none;
-      transition: border-color 0.3s, box-shadow 0.3s;
+      transition: border-color 0.3s, padding-left 0.3s;
       resize: vertical;
+      border-radius: 0;
     }
 
     .form-group input:focus,
     .form-group textarea:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-glow);
+      border-bottom-color: var(--accent);
+      padding-left: 0.5rem;
     }
 
     .form-group input::placeholder,
@@ -626,7 +942,7 @@
     }
 
     .form-group textarea {
-      min-height: 130px;
+      min-height: 120px;
     }
 
     .btn-submit {
@@ -641,11 +957,12 @@
       cursor: pointer;
       transition: all 0.3s;
       align-self: flex-start;
+      margin-top: 0.5rem;
     }
 
     .btn-submit:hover {
       background: var(--accent-light);
-      box-shadow: 0 0 30px var(--accent-glow);
+      box-shadow: 0 0 40px var(--accent-glow);
     }
 
     .form-status {
@@ -671,7 +988,7 @@
       position: relative;
       z-index: 1;
       border-top: 1px solid var(--border);
-      padding: 2rem 2.5rem;
+      padding: 2.5rem 2.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -695,8 +1012,8 @@
     /* ─── Reveal animations ─── */
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s, transform 0.7s;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .reveal.visible {
@@ -712,27 +1029,70 @@
       to { opacity: 1; }
     }
 
+    /* ─── Reduced motion ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
     /* ─── Responsive ─── */
     @media (max-width: 900px) {
-      .contact-grid {
+      .hero-inner {
         grid-template-columns: 1fr;
         gap: 3rem;
       }
 
-      .hero-top {
-        flex-direction: column;
-        gap: 1.5rem;
+      .hero-portrait {
+        order: -1;
+        justify-content: flex-start;
       }
 
       .hero-portrait-frame {
-        width: 130px;
+        max-width: 240px;
       }
 
-      .hero-aside { display: none; }
+      .hero-aside {
+        display: none;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+      }
+
+      .project {
+        grid-template-columns: 60px 1fr;
+        gap: 1rem;
+        padding: 2.5rem 1.5rem;
+        margin: 0 -1.5rem;
+      }
+
+      .project-meta {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        gap: 1rem;
+        padding-top: 0;
+        margin-bottom: 0.5rem;
+      }
+
+      .project-content {
+        grid-column: 1 / -1;
+      }
+
+      .project-index {
+        font-size: 1.2rem;
+      }
     }
 
     @media (max-width: 700px) {
-      nav { padding: 1rem 1.5rem; }
+      nav { padding: 1.25rem 1.5rem; }
       .container { padding: 0 1.5rem; }
 
       .nav-links {
@@ -759,23 +1119,48 @@
 
       .nav-toggle { display: block; z-index: 101; }
 
-      .project {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-      }
-
       .services-grid {
         grid-template-columns: 1fr;
         gap: 0;
+      }
+
+      .project {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        padding: 2.5rem 0;
+        margin: 0;
+      }
+
+      .project-meta {
+        flex-direction: column;
+        gap: 0.4rem;
       }
 
       .creds-row {
         grid-template-columns: 1fr;
       }
 
-      .hero { padding: 6rem 0 4rem; }
+      .opensource-feature {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 2.5rem 1.5rem;
+      }
 
-      .section-header { margin-bottom: 2.5rem; }
+      .badge-backdrop {
+        max-width: 200px;
+      }
+
+      .hero {
+        padding: 6rem 0 4rem;
+      }
+
+      .section-header {
+        margin-bottom: 3rem;
+      }
+
+      .hero-name {
+        font-size: clamp(2.8rem, 12vw, 4rem);
+      }
     }
   </style>
 </head>
@@ -788,6 +1173,7 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="#services">Services</a></li>
       <li><a href="#work">Work</a></li>
+      <li><a href="#opensource">Open Source</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
@@ -831,24 +1217,24 @@
         <h2 class="section-title">Services</h2>
       </div>
       <div class="services-grid reveal">
-        <div class="service-card">
+        <div class="service-card" data-num="01">
           <span class="service-icon">// infra</span>
           <h3>Cloud Infrastructure</h3>
           <p>Architecture, provisioning, and management of cloud environments on Azure, AWS, and GCP. Infrastructure as Code, cost optimization, and reliability engineering.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card" data-num="02">
           <span class="service-icon">// devops</span>
-          <h3>DevOps & CI/CD</h3>
+          <h3>DevOps &amp; CI/CD</h3>
           <p>End-to-end delivery pipelines, automated testing, containerization with Docker and Kubernetes, and GitOps workflows that accelerate your team's velocity.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card" data-num="03">
           <span class="service-icon">// platform</span>
           <h3>Platform Engineering</h3>
           <p>Internal developer platforms, golden paths, and self-service tooling that reduce cognitive load and let your engineers focus on what matters.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card" data-num="04">
           <span class="service-icon">// backend</span>
-          <h3>Backend & Custom Solutions</h3>
+          <h3>Backend &amp; Custom Solutions</h3>
           <p>Scalable APIs, data pipelines, integration middleware, and bespoke tools. Python, Java, and modern frameworks tailored to your requirements.</p>
         </div>
       </div>
@@ -864,6 +1250,7 @@
       </div>
 
       <div class="project reveal">
+        <div class="project-index">01</div>
         <div class="project-meta">
           <span class="project-client">Walgreens Boots Alliance</span>
           <span class="project-year">Enterprise</span>
@@ -881,6 +1268,7 @@
       </div>
 
       <div class="project reveal">
+        <div class="project-index">02</div>
         <div class="project-meta">
           <span class="project-client">Product</span>
           <span class="project-year">Integration</span>
@@ -898,6 +1286,7 @@
       </div>
 
       <div class="project reveal">
+        <div class="project-index">03</div>
         <div class="project-meta">
           <span class="project-client">National Deploy</span>
           <span class="project-year">Italy</span>
@@ -915,13 +1304,56 @@
     </div>
   </section>
 
+  <!-- Open Source -->
+  <section class="opensource" id="opensource">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-number">03</span>
+        <h2 class="section-title">Open Source</h2>
+      </div>
+
+      <div class="opensource-feature reveal">
+        <div class="opensource-badge">
+          <div class="badge-backdrop">
+            <img src="understudy-badge.png" alt="Understudy hexagonal badge: a Kubernetes pod on stage with theatre curtains and a standby pod exiting" width="371" height="318" loading="lazy">
+          </div>
+        </div>
+        <div class="opensource-body">
+          <div class="opensource-meta">
+            <span class="label">Project</span>
+            <span class="sub">Kubernetes Operator</span>
+          </div>
+          <div class="opensource-content">
+            <h3>Understudy</h3>
+            <p>A Kubernetes operator for best-effort high availability of single-replica workloads. When a node disruption announces itself — drain, upgrade, Karpenter consolidation, or spot reclaim — it brings up a stand-in pod, waits until that pod is genuinely serving traffic, and only then lets the original leave. The second pod exists only for the minutes a disruption is in flight.</p>
+            <p>During a real AWS spot interruption, it measured roughly one failed request — fewer than an ordinary rolling deploy of the same workload.</p>
+            <div class="opensource-traction">
+              <span>42+ GitHub stars within days of release</span>
+              <span>Front page of <a href="https://www.reddit.com/r/kubernetes/comments/1vh4our/zerodowntime_node_drains_for_singlereplica/" target="_blank" rel="noopener">r/kubernetes</a>, 41k+ views</span>
+            </div>
+            <div class="project-tags">
+              <span>Kubernetes</span>
+              <span>Go</span>
+              <span>Operator</span>
+              <span>Karpenter</span>
+              <span>EKS</span>
+            </div>
+            <div class="opensource-cta">
+              <a href="https://github.com/kylan11/understudy" class="btn-primary" target="_blank" rel="noopener">View on GitHub <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Credentials -->
   <section class="credentials">
     <div class="container">
       <div class="creds-row reveal">
         <div class="cred-item">
           <div class="label">Education</div>
-          <div class="value">B.S. Project Management & Information Systems</div>
+          <div class="value">B.S. Project Management &amp; Information Systems</div>
           <div class="sub">Univ. of Maine — 4.0 GPA, Summa Cum Laude</div>
         </div>
         <div class="cred-item">
@@ -990,10 +1422,24 @@
   </footer>
 
   <script>
-    // ─── Nav scroll effect ───
+    // ─── Nav scroll effect & active link ───
     const nav = document.querySelector('nav');
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 40);
+
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (window.scrollY >= sectionTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+      });
     });
 
     // ─── Mobile toggle ───
@@ -1011,7 +1457,7 @@
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          setTimeout(() => entry.target.classList.add('visible'), i * 100);
           observer.unobserve(entry.target);
         }
       });
